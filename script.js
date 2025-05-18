@@ -1,24 +1,29 @@
 const bankData = {
   bidv: {
     title: "BIDV",
-    qr: "bidv.jpg", // Đường dẫn đến ảnh cục bộ
+    qr: "bidv.jpg",
     account: "8812766424",
     name: "NGUYEN DUC HUY"
   },
   mbbank: {
     title: "MB Bank",
-    qr: "mb.jpg", // Đường dẫn đến ảnh cục bộ
+    qr: "mb.jpg",
     account: "0966030929",
     name: "NGUYEN DUC HUY"
   },
   momo: {
     title: "Momo",
-    qr: "momo.jpg", // Đường dẫn đến ảnh cục bộ
+    qr: "momo.jpg",
     account: "0966030929",
     name: "NGUYEN DUC HUY"
   }
 };
 
+const qrData = {
+  qrImage: "qr.jpg"
+};
+
+// Xử lý popup ngân hàng
 const bankButtons = document.querySelectorAll('.bank-btn');
 const popup = document.getElementById('bank-popup');
 const closePopup = document.getElementById('close-popup');
@@ -50,7 +55,25 @@ closePopup.addEventListener('click', () => {
   popup.classList.add('hidden');
 });
 
-function copyAccount() {
-  navigator.clipboard.writeText(bankAccount.textContent);
-  alert('Đã sao chép số tài khoản!');
-}
+// Xử lý popup QR
+const qrButton = document.getElementById('qr-btn');
+const qrPopup = document.getElementById('qr-popup');
+const closeQrPopup = document.getElementById('close-qr-popup');
+const qrImage = document.getElementById('qr-image');
+
+qrButton.addEventListener('click', () => {
+  qrImage.src = qrData.qrImage;
+  qrPopup.classList.remove('hidden');
+});
+
+closeQrPopup.addEventListener('click', () => {
+  qrPopup.classList.add('hidden');
+});
+
+// Xử lý nút Copy Link
+const copyLinkButton = document.getElementById('copy-link-btn');
+copyLinkButton.addEventListener('click', () => {
+  const currentUrl = window.location.href;
+  navigator.clipboard.writeText('https://huiinguen.github.io/introduction-/');
+  alert('Đã sao chép liên kết!');
+});
