@@ -6,45 +6,58 @@ body {
   align-items: center;
   font-family: 'Arial', sans-serif;
 }
+
 .social-icon {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .social-icon:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.header-effect {
+
+/* Hiệu ứng LED với màu sắc di chuyển */
+.border-animate {
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(45deg, #74ebd5, #acb6e5, #ff9a9e, #fad0c4);
-  background-size: 400%;
-  animation: gradientShift 15s ease infinite;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.header-effect::before {
+
+.border-animate::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
-  animation: pulse 5s ease-in-out infinite;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0),
+    rgba(255, 0, 0, 1),
+    rgba(0, 255, 0, 1),
+    rgba(0, 0, 255, 1),
+    rgba(0, 0, 255, 0),
+    rgba(255, 0, 0, 0)
+  );
+  background-size: 400%;
+  border-radius: 16px;
+  z-index: -1;
+  animation: ledFlow 4s linear infinite;
+  filter: blur(8px);
 }
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+
+@keyframes ledFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 400% 0%; }
 }
-@keyframes pulse {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
+
 .divider {
   border: 0;
   height: 2px;
   background: linear-gradient(to right, transparent, #74ebd5, #acb6e5, transparent);
   margin: 1.5rem 0;
 }
+
 @media (max-width: 640px) {
   .container {
     padding: 1rem;
@@ -56,8 +69,5 @@ body {
   img.w-24 {
     width: 5rem;
     height: 5rem;
-  }
-  .header-effect {
-    padding: 0.5rem;
   }
 }
